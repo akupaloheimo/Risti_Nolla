@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Axios from "axios";
 import Cookies from "universal-cookie"
 
-function Login() {
+function Login({ setIsAuth }) {
     const cookies = new Cookies();
     const[username, setUsername] = useState("");
     const[password, setPassword] = useState("");
@@ -21,7 +21,7 @@ function Login() {
       });
     };
   return (
-    <div classname="login">
+    <div className="login">
         <label> Login</label>
         <input placeholder='Username' onChange={(event) => {
             setUsername(event.target.value);
