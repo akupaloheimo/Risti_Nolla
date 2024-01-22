@@ -17,7 +17,7 @@ function Login({ setIsAuth }) {
         cookies.set("username", username);
         cookies.set("lastName", lastName);
         cookies.set("firstName", firstName);
-        setIsAuth(true)
+        setIsAuth(true);
       });
     };
   return (

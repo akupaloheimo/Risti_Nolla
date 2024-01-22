@@ -3,12 +3,26 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import {StreamChat} from "stream-chat";
 import Cookies from "universal-cookie";
+import {useState} from "react";
 
 function App() {
   const api_key = process.env.REACT_APP_API_KEY;
   const cookies = new Cookies();
   const token = cookies.get("token");
   const client = StreamChat.getInstance(api_key);
+  const [isAuth, setIsAuth] = useState(false);
+
+  const logOut = () => {
+    cookies.remove("token");
+    cookies.remove("userId");
+    cookies.remove("firstName");
+    cookies.remove("lastName");
+    cookies.remove("hashedPassword");
+    cookies.remove("channelName");
+    cookies.remove("username");
+    client.disconnectUser();
+    setIsAuth(false);
+  }
 
   if (token) {
     client.connectUser({
@@ -22,12 +36,19 @@ function App() {
     ).then((user) => {
       console.log(user);
       console.log(cookies);
+      setIsAuth(true)
     });
   }
   return (
     <div className="App">
-      <SignUp/>
-      <Login/>
+      {isAuth ? (
+      <button onClick={logOut}> Log Out </button>
+      ) : (
+        <>
+      <SignUp setIsAuth={setIsAuth}/>
+      <Login setIsAuth={setIsAuth}/>
+      </>
+      )}
     </div>
   );
 }
