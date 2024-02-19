@@ -3,12 +3,14 @@ import cors from "cors";
 import {StreamChat} from "stream-chat";
 import {v4 as uuidv4} from "uuid";
 import bcrypt from "bcrypt";
+import keys from "./Config";
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-const api_key = process.env.REACT_APP_API_KEY;
-const api_secret = process.env.REACT_APP_API_SECRET;
+const api_key = keys.REACT_APP_API_KEY;
+const api_secret = keys.REACT_APP_API_SECRET;
 const serverClient = StreamChat.getInstance(api_key, api_secret);
 
 app.post("/signup", async (req, res) => {
