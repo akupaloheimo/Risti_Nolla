@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Board from "./board";
+import Board from "./Board";
 import { Window, MessageList, MessageInput } from "stream-chat-react";
 import "./Chat.css";
 function Game({ channel, setChannel }) {
